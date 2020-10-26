@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace TAuth.Models
 {
-   public class IdToken : Token
+   public class IdToken
    {
       [JsonPropertyName("sub")]
       public string Subject { get; set; }

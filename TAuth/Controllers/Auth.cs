@@ -10,6 +10,13 @@ namespace TAuth.Controllers
    [Route("authorize")]
    public class AuthController : Controller
    {
+      private readonly JwtHandler _jwtHandler;
+
+      public AuthController(JwtHandler jwtHandler)
+      {
+         _jwtHandler = jwtHandler;
+      }
+      
       // GET
       public IActionResult Index()
       {
@@ -25,7 +32,7 @@ namespace TAuth.Controllers
             }
          };
 
-         return View("~/Pages/Auth/Index.cshtml", token.GetJwt());
+         return View("~/Pages/Auth/Index.cshtml", _jwtHandler.GetJwt(token));
       }
    }
 }
