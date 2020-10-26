@@ -13,7 +13,7 @@ namespace TAuth.Controllers
       [HttpGet("wot")]
       public JwkContainer GetKeys()
       {
-         X509Certificate2 cert = new X509Certificate2("c:\\dev\\cert.pem");
+         var cert = new X509Certificate2("c:\\dev\\out.pfx", "test");
          X509Chain chain = new X509Chain();
          chain.Build(cert);
          
@@ -29,7 +29,7 @@ namespace TAuth.Controllers
 
          var key = new RsaSecurityKey(rsa)
          {
-            KeyId = "1"
+            KeyId = cert.Thumbprint
          };
          
          return new JwkContainer()

@@ -20,7 +20,7 @@ namespace TAuth.Models
 
          var key = new RsaSecurityKey(rsa)
          {
-            KeyId = "1"
+            KeyId = cert.Thumbprint
          };
 
          var signingCredentials = new SigningCredentials(key, 
