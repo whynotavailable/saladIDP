@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
@@ -38,14 +39,12 @@ namespace TAuth.Models
             Algorithm = "RSA256",
             KeyType = "RSA",
             Use = "sig",
-            Moduluos = parameters.Modulus == null ? null : Base64UrlEncoder.Encode(parameters.Modulus),
-            Exponent = parameters.Exponent == null ? null : Base64UrlEncoder.Encode(parameters.Exponent),
+            Moduluos = parameters.Modulus == null ? null : Convert.ToBase64String(parameters.Modulus),
+            Exponent = parameters.Exponent == null ? null : Convert.ToBase64String(parameters.Exponent),
             KeyId = key.KeyId,
             Certs = certs,
             Thumbprint = thumbprint
          };
       }
-
-      
    }
 }

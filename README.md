@@ -18,3 +18,7 @@ This is so that you can lock the management operations behind your firewall whil
 The main database for management operations will be postgresql.
 
 For information pertaining to the roadmap please look at ROADMAP.md
+
+ `winpty openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365`
+ 
+ `winpty openssl pkcs12 -export -in cert.pem -inkey key.pem -out out.pfx`

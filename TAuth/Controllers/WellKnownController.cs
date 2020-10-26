@@ -11,7 +11,7 @@ namespace TAuth.Controllers
    public class WellKnownController : ControllerBase
    {
       [HttpGet("wot")]
-      public List<Jwk> GetKeys()
+      public JwkContainer GetKeys()
       {
          X509Certificate2 cert = new X509Certificate2("c:\\dev\\cert.pem");
          X509Chain chain = new X509Chain();
@@ -21,7 +21,8 @@ namespace TAuth.Controllers
 
          foreach (var c in chain.ChainElements)
          {
-            certs.Add(Base64UrlEncoder.Encode(c.Certificate.GetRawCertData()));
+            //certs.Add(Base64UrlEncoder.Encode(c.Certificate.GetRawCertData()));
+            certs.Add(System.Convert.ToBase64String(c.Certificate.GetRawCertData()));
          }
          
          var rsa = cert.GetRSAPublicKey();
@@ -31,9 +32,12 @@ namespace TAuth.Controllers
             KeyId = "1"
          };
          
-         return new List<Jwk>()
+         return new JwkContainer()
          {
-            Jwk.CreateFromKey(key, rsa.ExportParameters(false), certs, cert.Thumbprint)
+            Keys = new List<Jwk>()
+            {
+               Jwk.CreateFromKey(key, rsa.ExportParameters(false), certs, cert.Thumbprint)
+            }
          };
       }
    }

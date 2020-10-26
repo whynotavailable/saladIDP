@@ -15,7 +15,7 @@ namespace TAuth.Models
    {
       public string GetJwt()
       {
-         X509Certificate2 cert = new X509Certificate2("c:\\dev\\out.pfx", "test");
+         var cert = new X509Certificate2("c:\\dev\\out.pfx", "test");
          var rsa = cert.GetRSAPrivateKey();
 
          var key = new RsaSecurityKey(rsa)
@@ -24,7 +24,7 @@ namespace TAuth.Models
          };
 
          var signingCredentials = new SigningCredentials(key, 
-            SecurityAlgorithms.RsaSha256, SecurityAlgorithms.RsaSha256);
+            SecurityAlgorithms.RsaSha512, SecurityAlgorithms.RsaSha512);
 
          var header = new JwtHeader(signingCredentials).Base64UrlEncode();
 

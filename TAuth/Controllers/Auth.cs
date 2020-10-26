@@ -25,8 +25,7 @@ namespace TAuth.Controllers
             }
          };
 
-         Console.WriteLine(token.GetJwt());
-         return View("~/Pages/Auth/Index.cshtml");
+         return View("~/Pages/Auth/Index.cshtml", token.GetJwt());
       }
    }
 }
