@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -53,7 +53,7 @@ namespace TAuth
             {
                Keys = _certs.Select(certLocation =>
                {
-                  var cert = new X509Certificate2(_certData.GetValueOrDefault(certLocation) ?? new byte[] { }, _certPassword.GetValueOrDefault(certLocation));
+                  var cert = new X509Certificate2(_certData.GetValueOrDefault(certLocation) ?? Array.Empty<byte>(), _certPassword.GetValueOrDefault(certLocation));
                   var chain = new X509Chain();
                   chain.Build(cert);
 
